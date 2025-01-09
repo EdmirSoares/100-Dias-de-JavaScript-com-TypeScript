@@ -1,0 +1,24 @@
+{
+  "name": "10-typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dist": "tsup src",
+    "dev": "tsx src/index.ts",
+    "watch": "tsx watch src/index.ts",
+    "start:dist": "npm run dist && node dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/prompt-sync": "^4.2.3",
+    "tsup": "^8.0.2",
+    "tsx": "^4.7.1",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
+  }
+}
