@@ -1,8 +1,9 @@
-import ExercicioUm from './exercicioUm';
+import PartOne from "./PartOne";
 
+const Main = () => {
+    const { calcAverage, evenOrOdd, celciusToFahrenheit, primeNumber, biggestNumber } = PartOne();
 
-const main = ()=>{
-    ExercicioUm();
-}
+    biggestNumber();
+};
 
-main();
+Main();
