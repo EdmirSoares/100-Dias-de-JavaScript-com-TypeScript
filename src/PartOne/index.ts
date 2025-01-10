@@ -87,12 +87,12 @@ export default function PartOne() {
         let arrNumbers = []
         let result: number = 0
 
-        for(let i = 0; i< 3; i++){
+        for (let i = 0; i < 3; i++) {
 
-            const numberInput : number | null = parseFloat(prompt(`Insira o ${i + 1}º Valor: `))
+            const numberInput: number | null = parseFloat(prompt(`Insira o ${i + 1}º Valor: `))
 
 
-            if(isNullOrNan(numberInput)){
+            if (isNullOrNan(numberInput)) {
                 console.log("Finalizando Operação...")
                 return
             }
@@ -100,11 +100,26 @@ export default function PartOne() {
             arrNumbers.push(numberInput)
         }
 
-        arrNumbers.map((currentElement:number)=>{
-           result =  currentElement > result ? currentElement: result
+        arrNumbers.map((currentElement: number) => {
+            result = currentElement > result ? currentElement : result
         })
 
-        console.log(result)
+        console.log(`O maior número é: ${result}`)
+    }
+
+    const factorialNumber = () => {
+        const numberInput: number | null = parseInt(prompt("Insira o número que deseja calcular: "))
+        let result: number = 1
+
+        if (isNullOrNan(numberInput)) {
+            return
+        }
+
+        for (let i = numberInput; i > 0; i--) {
+            result *= i
+        }
+
+        console.log(`O fatorial de ${numberInput} é: ${result}`);
     }
 
     return {
@@ -112,7 +127,8 @@ export default function PartOne() {
         evenOrOdd,
         celciusToFahrenheit,
         primeNumber,
-        biggestNumber
+        biggestNumber,
+        factorialNumber
     }
 
 }
