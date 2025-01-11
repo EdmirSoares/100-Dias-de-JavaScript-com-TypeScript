@@ -1,9 +1,11 @@
 import promptSync from 'prompt-sync';
-import Verifications from '../utils/VerifyNullAndNaN';
+import Verifications from '../utils/Verifications';
+import BasicFormatters from '../utils/BasicFormatters';
 
 export default function PartOne() {
     const prompt = promptSync({ sigint: true });
     const { isNullOrNan } = Verifications()
+    const { padStartFormatter } = BasicFormatters()
 
     const calcAverage = () => {
 
@@ -122,13 +124,89 @@ export default function PartOne() {
         console.log(`O fatorial de ${numberInput} é: ${result}`);
     }
 
+    const fizzAndBuzz = () => {
+        const arrItens: string[] = []
+
+        for (let i = 1; i <= 100; i++) {
+            arrItens.push(i.toString())
+        }
+        console.log("Convertando múltiplos de 3 para Fizz, de 5 para Buzz e de 3")
+        console.log("Números antes da conversão: \n", arrItens)
+
+        for (let i = 0; i < arrItens.length; i++) {
+            if (parseInt(arrItens[i]) % 3 === 0 && parseInt(arrItens[i]) % 5 === 0) {
+                arrItens[i] = "FizzBuzz"
+            } else if (parseInt(arrItens[i]) % 3 === 0) {
+                (arrItens[i]) = "Fizz"
+            } else if (parseInt(arrItens[i]) % 5 === 0) {
+                arrItens[i] = "Buzz"
+            }
+        }
+        console.log("Números após da conversão: \n", arrItens)
+    }
+
+    const secondsToHourFomate = () => {
+        const secondsValue: number = 7384;
+
+        const hour: number = Math.floor(secondsValue / 3600)
+
+        const minutesRest: number = (secondsValue % 3600)
+        const minutes: number = Math.floor(minutesRest / 60)
+
+        const seconds = minutesRest % 60
+
+        console.log(`O valor 7384 segundos, convertido para horas, resulta em: ${padStartFormatter(hour, 2, "0")}:${padStartFormatter(minutes, 2, "0")}:${padStartFormatter(seconds, 2, "0")}`)
+    }
+
+    const numberPalindrome = () => {
+
+        console.log("Verificador Palindromo de números!")
+        const numberInput: number | null = parseFloat(prompt("Informe o número que deseja verificar: "))
+
+        if (isNullOrNan(numberInput)) {
+            return
+        }
+
+        const arrNumbers = String(numberInput).split("")
+        const reverseArrNumbers = arrNumbers.slice().reverse()
+
+        for (let i = 0; i < arrNumbers.length; i++) {
+
+            if(arrNumbers[i] !== reverseArrNumbers[i]){
+                console.log("O número informado não é um palíndromo!")
+                return
+            }
+        }
+
+        console.log(`O número ${numberInput} é um palindromo!`)
+
+    }
+
+    const fibonacciSequence = ()=>{
+        const numberInput: number | null = Number(prompt("Insira o valor alvo para o calculo: "))
+
+        let fibA  = 1, fibB = 1;
+
+        for (let i = 3; i <= numberInput; i++) {
+            let fibC = fibA + fibB;
+            fibA = fibB;
+            fibB = fibC;
+        }
+        
+        console.log(`O número final da sequencia Fibonacci para o número ${numberInput} é: ${fibB}`)
+    }
+
     return {
         calcAverage,
         evenOrOdd,
         celciusToFahrenheit,
         primeNumber,
         biggestNumber,
-        factorialNumber
+        factorialNumber,
+        fizzAndBuzz,
+        secondsToHourFomate,
+        numberPalindrome,
+        fibonacciSequence
     }
 
 }
