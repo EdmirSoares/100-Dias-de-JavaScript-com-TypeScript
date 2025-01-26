@@ -18,10 +18,13 @@ const Main = () => {
     const {
         palindromeString,
         convertToCapitalizeString,
-        countVogals
+        countVogals,
+        changeWord,
+        reversedWord,
+        wordCount
     } = PartTwo()
 
-    countVogals();
+    wordCount();
 };
 
 Main();

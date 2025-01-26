@@ -35,7 +35,7 @@ export default function PartTwo() {
 
     const countVogals = () => {
         const stringPrompt: string | null = prompt("Informe a palavra que deseja verificar: ")
-        const regex = /^[aeiou]+$/i;
+        const regex: RegExp = /^[aeiou]+$/i;
         let numberOfVogals = 0
 
         if (stringPrompt === null || stringPrompt === "") {
@@ -51,14 +51,58 @@ export default function PartTwo() {
             }
         })
 
-        console.log(numberOfVogals > 0 ? `O total de vogais presentes na palavra ${stringPrompt} é: ${numberOfVogals}`: `A palavra ${stringPrompt} não possui vogais!`)
-        
+        console.log(numberOfVogals > 0 ? `O total de vogais presentes na palavra ${stringPrompt} é: ${numberOfVogals}` : `A palavra ${stringPrompt} não possui vogais!`)
+
+    }
+
+    const changeWord = () => {
+        const phrasePrompt: string | null = prompt("Informe a frase: ")
+        const replacedWordPrompt: string | null = prompt("Informe a palavra presente na frase, que deseja substituir: ")
+        const wordToReplacePrompt: string | null = prompt("Agora informe a nova palavra: ")
+
+        const arrString: string[] = phrasePrompt.split(" ")
+
+        arrString.forEach((value: string, index: number) => {
+            if (arrString[index] === replacedWordPrompt) {
+                arrString[index] = wordToReplacePrompt
+            }
+        })
+
+        const changedPhrase: string = arrString.join(" ")
+
+        console.log(changedPhrase)
+    }
+
+    const reversedWord = () => {
+        const wordToReversPrompt: string | null = prompt("Informe a palavra que deseja reverter: ")
+
+        const reversedWord: string = wordToReversPrompt.split("").reverse().join("")
+        console.log(reversedWord)
+    }
+
+    const wordCount = () => {
+        const phrasePrompt: string | null = prompt("Informe a frase ou texto que deseja verificar: ");
+        if (phrasePrompt === null || phrasePrompt === "") {
+            console.log("Operação cancelada pelo usuário");
+            return;
+        }
+    
+        const cleanedPhrase = phrasePrompt.replace(/[^\w\sà-úÀ-Úâ-ûÂ-Ûã-õÃ-Õä-üÄ-Üá-úÁ-ÚçÇ]/g, "");
+    
+        const arrPhrase = cleanedPhrase.split(" ").filter(word => word.length > 0);
+    
+        const numberOfWords = arrPhrase.length;
+    
+        console.log(`O total de palavras na frase é: ${numberOfWords}`);
     }
 
     return {
         palindromeString,
         convertToCapitalizeString,
-        countVogals
+        countVogals,
+        changeWord,
+        reversedWord,
+        wordCount
     }
 
 }
