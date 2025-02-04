@@ -21,10 +21,13 @@ const Main = () => {
         countVogals,
         changeWord,
         reversedWord,
-        wordCount
+        wordCount,
+        findEmailDomain,
+        replaceSpacesWithHyphen,
+        cpfVerification
     } = PartTwo()
 
-    wordCount();
+    cpfVerification();
 };
 
 Main();

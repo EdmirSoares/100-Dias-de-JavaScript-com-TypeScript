@@ -82,18 +82,75 @@ export default function PartTwo() {
 
     const wordCount = () => {
         const phrasePrompt: string | null = prompt("Informe a frase ou texto que deseja verificar: ");
+
         if (phrasePrompt === null || phrasePrompt === "") {
             console.log("Operação cancelada pelo usuário");
             return;
         }
-    
+
         const cleanedPhrase = phrasePrompt.replace(/[^\w\sà-úÀ-Úâ-ûÂ-Ûã-õÃ-Õä-üÄ-Üá-úÁ-ÚçÇ]/g, "");
-    
+
         const arrPhrase = cleanedPhrase.split(" ").filter(word => word.length > 0);
-    
+
         const numberOfWords = arrPhrase.length;
-    
+
         console.log(`O total de palavras na frase é: ${numberOfWords}`);
+    }
+
+    const findEmailDomain = () => {
+        const emailPrompt: string | null = prompt("Informe o email que deseja verificar: ");
+        if (emailPrompt === null || emailPrompt === "" || !emailPrompt.includes("@")) {
+            console.log("Operação cancelada pelo usuário");
+            return;
+        }
+
+        const emailDomain: string = emailPrompt.split("@")[1];
+        console.log(`O domínio do email informado é ${emailDomain}`);
+
+    }
+
+    const replaceSpacesWithHyphen = () => {
+        const phrasePrompt: string | null = prompt("Informe a frase que contém os espaços que deseja verificar: ")
+        if (phrasePrompt === null || phrasePrompt === "" || !phrasePrompt.includes(" ")) {
+            console.log("Operação cancelada pelo usuário");
+            return
+        }
+
+        const replacedPhrase: string = phrasePrompt.replace(/ /g, "-");
+        console.log(`A frase informada foi: ${phrasePrompt}`);
+        console.log(`Substituindo os espaços por hífen, o resultado é: ${replacedPhrase}`);
+    };
+
+    const cpfVerification = () => {
+        const cpfPrompt: string | null = prompt("Informe o cpf que deseja verificar: ")
+        if (cpfPrompt === null || cpfPrompt === "") {
+            console.log("Operação cancelada pelo usuário")
+            return
+        }
+
+        const clearCPF: string[] = cpfPrompt.replace(/\./g, "").replace(/\D/g, "").split("")
+        const arrVerification: number[] = [10, 9, 8, 7, 6, 5, 4, 3, 2]
+
+        let firstDigit = 0
+        let secondDigit = 0
+
+        for (let i = 0; i < clearCPF.length; i++) {
+            firstDigit += (Number(clearCPF[i]) * arrVerification[i])
+        }
+
+        firstDigit = firstDigit % 11 >= 2 ? 11 - firstDigit % 11 : 0
+
+        clearCPF.push(String(firstDigit))
+        arrVerification.unshift(11)
+
+        for (let i = 0; i < clearCPF.length; i++) {
+            secondDigit += (Number(clearCPF[i]) * arrVerification[i])
+        }
+        secondDigit = secondDigit % 11 >= 2 ? 11 - secondDigit % 11 : 0
+        clearCPF.push(String(secondDigit))
+
+        const maskedCPF = clearCPF.join("").replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+        console.log(maskedCPF)
     }
 
     return {
@@ -102,7 +159,10 @@ export default function PartTwo() {
         countVogals,
         changeWord,
         reversedWord,
-        wordCount
+        wordCount,
+        findEmailDomain,
+        replaceSpacesWithHyphen,
+        cpfVerification,
     }
 
 }
