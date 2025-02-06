@@ -24,10 +24,11 @@ const Main = () => {
         wordCount,
         findEmailDomain,
         replaceSpacesWithHyphen,
-        cpfVerification
+        cpfVerification,
+        phoneNumberFormatter
     } = PartTwo()
 
-    cpfVerification();
+    phoneNumberFormatter();
 };
 
 Main();
