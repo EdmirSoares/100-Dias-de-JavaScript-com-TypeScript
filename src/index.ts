@@ -1,5 +1,6 @@
 import PartOne from "./PartOne";
 import PartTwo from "./PartTwo";
+import PartThree from "./PartThree";
 
 const Main = () => {
     const {
@@ -28,7 +29,12 @@ const Main = () => {
         phoneNumberFormatter
     } = PartTwo()
 
-    phoneNumberFormatter();
+    const{
+        loginSystemSimulation,
+        randomNumberGuesser
+    } = PartThree()
+
+    randomNumberGuesser();
 };
 
 Main();

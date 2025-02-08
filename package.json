@@ -6,7 +6,6 @@
     "scripts": {
         "dist": "tsup src",
         "dev": "cls&& tsx src/index.ts",
-        "watch": "tsx watch src/index.ts",
         "start:dist": "npm run dist && node dist/index.js"
     },
     "keywords": [],
