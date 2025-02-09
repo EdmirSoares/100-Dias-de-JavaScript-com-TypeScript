@@ -31,10 +31,14 @@ const Main = () => {
 
     const{
         loginSystemSimulation,
-        randomNumberGuesser
+        randomNumberGuesser,
+        multiplicationTable,
+        twoDiceRow,
+        interactiveConsoleMenu,
+        upToVote
     } = PartThree()
 
-    randomNumberGuesser();
+    upToVote();
 };
 
 Main();

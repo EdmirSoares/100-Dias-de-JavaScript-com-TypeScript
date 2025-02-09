@@ -122,10 +122,10 @@ export default function PartThree() {
             return
         }
 
-        const randomNumber = Math.floor((Math.random()) * 10) + 1
+        const randomNumber = Math.floor(Math.random() * 10) + 1
         console.log(`Seu palpite foi :${numberUserPrompt}, o número gerado foi: ${randomNumber}`)
 
-        if(numberUserPrompt !== randomNumber){
+        if (numberUserPrompt !== randomNumber) {
             console.log("Que pena, você errou! Boa sorte na próxima.")
             await new Promise((resolve) => setTimeout(resolve, 500));
             console.log("HAHAHAHA")
@@ -134,8 +134,121 @@ export default function PartThree() {
         }
     }
 
+    const multiplicationTable = async () => {
+        const numberUserPrompt: number | null = Number(prompt("Informe de qual número deseja exibir a tabuada: "))
+
+        if (isNaN(numberUserPrompt) || null) {
+            console.log("Informe um valor válido!")
+            return
+        }
+        await new Promise((resolve) => setTimeout(resolve, 500));
+
+        console.log("Calculando...")
+        await new Promise((resolve) => setTimeout(resolve, 500));
+
+        console.log(`Tabuada de ${numberUserPrompt}`)
+        for (let i = 1; i < 11; i++) {
+            console.log(`${numberUserPrompt} x ${i} = ${numberUserPrompt * i}`)
+        }
+    }
+
+    const twoDiceRow = async () => {
+        const firstDicePrompt: number | null = Number(prompt("Informe quantos lados tem o primeiro dado: "))
+        let secondDicePrompt: number | null = Number(prompt("Informe quantos lados tem o segundo dado, ou digite 0 para jogar com dois dados iguais"))
+
+        if (isNaN(firstDicePrompt) || isNaN(secondDicePrompt)) {
+            console.log("Informe um valor válido!")
+            return
+        }
+
+        if (secondDicePrompt === 0) {
+            secondDicePrompt = firstDicePrompt
+        }
+
+        console.log("Rolando os dados...")
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
+        const firstDiceResult = Math.floor(Math.random() * firstDicePrompt) + 1
+        const secondDiceResults = Math.floor(Math.random() * secondDicePrompt) + 1
+
+        console.log(`Primeiro dado: ${firstDiceResult}`)
+        await new Promise((resolve) => setTimeout(resolve, 500));
+        console.log(`Segundo dado: ${secondDiceResults}`)
+
+    }
+
+    const interactiveConsoleMenu = async () => {
+        while (true) {
+            console.log("Bem-vindo(a)!")
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+
+
+            console.log("#### Menu Principal ####")
+            console.log("1-Home\n02-Sobre\n3-Galeria\n4-Contato\n9-Sair")
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+
+            const menuChoicePrompt: number | null = Number(prompt("Escolha uma das opções acima: "))
+
+            if (isNaN(menuChoicePrompt) || menuChoicePrompt < 1 || menuChoicePrompt > 4) {
+                if (menuChoicePrompt === 9) {
+                    console.log("Finalizando aplicação...");
+                    break;
+                }
+                console.log("Escolha uma opção válida!");
+                console.log("Retornando ao menu principal...\n");
+                continue;
+            }
+
+            if (menuChoicePrompt === 1) {
+                console.log("Você está na Home Page!")
+            } else if (menuChoicePrompt === 2) {
+                console.log('Você está na seção "Sobre"!')
+            } else if (menuChoicePrompt === 3) {
+                console.log('Você está na seção "Galeria"!')
+            } else {
+                console.log('Você está na seção "Contatos"!')
+            }
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+
+            const returnToMenuPrompt: number = Number(prompt("Informe 1 para voltar ao menu ou 2 para sair: "))
+
+            if (returnToMenuPrompt === 1) {
+                console.log("Retornando ao menu Inicial...")
+                continue
+            } else {
+                console.log("Encerrando a aplicação")
+                break
+            }
+
+        }
+    }
+
+    const upToVote = () => {
+        const usernamePrompt: string = prompt("Informe seu primeiro nome: ")
+        const agePrompt: number = Number(prompt("Informe seu ano de Nascimento: "))
+
+        if (isNaN(agePrompt)) {
+            console.log("Valor inválido!")
+            console.log("Cancelando operação...")
+            return
+        }
+
+        const currentYear = new Date().getFullYear();
+        const age = currentYear - agePrompt;
+
+        if (age < 18) {
+            console.log(`${usernamePrompt}, você não está ápto a votar! Sua idade é de ${age}, precisa ser maior de 18 anos!`)
+        } else {
+            console.log(`${usernamePrompt}, você tem ${age}, está ápto a votar!`)
+        }
+    }
+
     return {
         loginSystemSimulation,
-        randomNumberGuesser
+        randomNumberGuesser,
+        multiplicationTable,
+        twoDiceRow,
+        interactiveConsoleMenu,
+        upToVote
     };
 }
