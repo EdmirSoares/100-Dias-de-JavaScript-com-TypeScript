@@ -233,8 +233,8 @@ export default function PartThree() {
             return
         }
 
-        const currentYear = new Date().getFullYear();
-        const age = currentYear - agePrompt;
+        const currentYear: number = new Date().getFullYear();
+        const age: number = currentYear - agePrompt;
 
         if (age < 18) {
             console.log(`${usernamePrompt}, você não está ápto a votar! Sua idade é de ${age}, precisa ser maior de 18 anos!`)
@@ -243,12 +243,111 @@ export default function PartThree() {
         }
     }
 
+    const calculateAge = () => {
+        const agePrompt: number = Number(prompt("Informe seu ano e nascimento: "))
+
+        if (isNaN(agePrompt)) {
+            console.log("Valor inválido!")
+            console.log("Cancelando operação...")
+            return
+        }
+
+        const currentYear: number = new Date().getFullYear()
+        const finalAge: number = currentYear - agePrompt
+
+        console.log(`Com base no seu ano de nascimento, sua idade é: ${finalAge}`)
+    }
+
+    const tenSecondsTimer = async () => {
+
+        const timer = () => {
+            console.log("Iniciando Contagem...")
+            let count: number = 0
+
+            return new Promise<void>((resolve: () => void) => {
+                const intervalId = setInterval(() => {
+                    count += 1;
+                    console.log(`Contagem: ${count}`);
+                    if (count >= 10) {
+                        clearInterval(intervalId);
+                        resolve();
+                    }
+                }, 1000);
+            });
+        };
+
+        await timer();
+        console.log("Contagem finalizada!");
+
+    }
+
+    const trafficLight = async () => {
+        let count: number = 0;
+
+        const redLight = () => {
+            console.log("🔴...Aguarde!\n");
+            count = 5;
+            return new Promise<void>((resolve: () => void) => {
+                const redLightCount = setInterval(() => {
+                    count -= 1;
+                    console.log(`O semáforo irá abrir em: ${count}`);
+                    if (count < 1) {
+                        clearInterval(redLightCount);
+                        resolve();
+                        console.log("\n🟢... Pode seguir!\n")
+                    }
+                }, 1000)
+            })
+        }
+
+        const yellowLight = async () => {
+            console.log("🟡... Atenção!\n");
+            count = 3;
+
+            return new Promise<void>((resolve: () => void) => {
+                const yellowLightCount = setInterval(() => {
+                    count -= 1;
+                    console.log(`O semáfoto irá fechar em: ${count}`);
+                    if (count < 1) {
+                        clearInterval(yellowLightCount);
+                        resolve();
+                        console.log("\n")
+                    }
+                }, 1000)
+            })
+        }
+
+        const greenLight = async () => {
+            
+            count = 10;
+
+            return new Promise<void>((resolve: () => void) => {
+                const greeLightCount = setInterval(() => {
+                    count -= 1;
+                    console.log(`O semáforo irá fechar em: ${count}`)
+                    if (count < 4) {
+                        clearInterval(greeLightCount);
+                        resolve();
+                        console.log("\n")
+                    }
+                }, 1000)
+            })
+        }
+
+        await greenLight();
+        await yellowLight();
+        await redLight();
+    }
+
     return {
         loginSystemSimulation,
         randomNumberGuesser,
         multiplicationTable,
         twoDiceRow,
         interactiveConsoleMenu,
-        upToVote
+        upToVote,
+        calculateAge,
+        tenSecondsTimer,
+        trafficLight
     };
 }
