@@ -50,10 +50,10 @@ async function Menu(page: number = 0) {
 
         const selectedIndex = parseInt(promptChoice, 10) - 1;
 
-        if (!isNaN(selectedIndex) && currentPage[selectedIndex]) {
+        if (!isNaN(selectedIndex) && functionsKeys[selectedIndex]) {
             console.clear();
-            console.log(`Executando: ${currentPage[selectedIndex]}\n`);
-            functions[currentPage[selectedIndex]]();
+            console.log(`Executando: ${functionsKeys[selectedIndex]}\n`);
+            await functions[functionsKeys[selectedIndex]]();
             prompt("\nPressione Enter para continuar...");
             Menu(page);
         } else {
