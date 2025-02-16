@@ -318,7 +318,7 @@ export default function PartThree() {
         }
 
         const greenLight = async () => {
-            
+
             count = 10;
 
             return new Promise<void>((resolve: () => void) => {
@@ -339,6 +339,86 @@ export default function PartThree() {
         await redLight();
     }
 
+    const withdrawMoneyATM = () => {
+
+        const accountData: { balance: number, transations: Array<{ id?: number, type?: string, value?: number, time?: string }> } = {
+            balance: 0,
+            transations: []
+        }
+
+        const registerTransaction = (typeProp: string, valueProp: number) => {
+            const transactionData = {
+                id: accountData.transations.length + 1,
+                type: typeProp,
+                value: valueProp,
+                time: new Date().toLocaleString().split(", ").join("")
+            }
+
+            accountData.transations.push(transactionData)
+        }
+
+        while (true) {
+
+            console.log("========= Menu =========")
+            console.log("Escolha uma das opções abaixo:")
+            console.log("1#. Depósito\n2#. Saque\n3#. Extrato\n0#. Sair\n")
+
+            const menuChoice: number = Number(prompt(">: "))
+            if (isNaN(menuChoice) || menuChoice > 4) {
+                console.log("Opção inválida!\n")
+                continue
+            }
+
+            if (menuChoice === 0) {
+                console.log("Fechando Aplicação...")
+                break
+            }
+
+            if (menuChoice === 2) {
+                const withdrawPrompt: number = parseFloat(prompt("Informe o valor do *Saque*: "))
+
+                if (isNaN(withdrawPrompt)) {
+                    console.log("Informe um valor válido!\n");
+                } else if (withdrawPrompt % 10) {
+                    console.log("Valor inválido! Saque permitido somente para múltiplos de 10!\n")
+                } else if (accountData.balance < withdrawPrompt) {
+                    console.log("Saldo insuficiente!\n")
+                } else {
+                    accountData.balance -= withdrawPrompt
+                    registerTransaction('withdraw', withdrawPrompt)
+                    console.log(`Saque no valor de ${withdrawPrompt} realizado com sucesso!`)
+                    console.log(`O saldo atual é de: ${accountData.balance}\n`)
+                }
+            } else if (menuChoice === 1) {
+
+                const depositPrompt: number = parseFloat(prompt("Informe o valor do *Depósito*: "))
+
+                if (isNaN(depositPrompt) || depositPrompt < 1) {
+                    console.log("Informe um valor válido!\n")
+                } else {
+                    accountData.balance += depositPrompt
+                    registerTransaction('deposit', depositPrompt)
+                    console.log(`Depósito no valor de ${depositPrompt} realizado com sucesso!`)
+                    console.log(`O saldo atual é de: ${accountData.balance}\n`)
+                }
+            } else {
+                if (accountData.transations.length === 0) {
+                    console.log("Nenhuma transação encortada!")
+                    continue
+                } else {
+                    accountData.transations.forEach((value) => {
+                        console.log(`# ${value.id}`)
+                        console.log(`# Tipo: ${value.type}`)
+                        console.log(`# Valor: ${value.value}`)
+                        console.log(`# ${value.time?.replace(/(\d{2}\/\d{2}\/\d{4})(\d{2}:\d{2}:\d{2})/, "Data: $1\n# Horário: $2\n")}`)
+                    })
+                }
+            }
+
+        }
+
+    }
+
     return {
         loginSystemSimulation,
         randomNumberGuesser,
@@ -348,6 +428,7 @@ export default function PartThree() {
         upToVote,
         calculateAge,
         tenSecondsTimer,
-        trafficLight
+        trafficLight,
+        withdrawMoneyATM
     };
 }
