@@ -2,7 +2,7 @@ import PromptSync from "prompt-sync";
 
 //Estruturas de Controle
 
-export default function PartThree() {
+export default function Conditionals() {
     const prompt = PromptSync({ sigint: true });
 
     const loginSystemSimulation = async () => {

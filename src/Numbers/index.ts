@@ -4,7 +4,7 @@ import BasicFormatters from "../utils/BasicFormatters";
 
 //Manipulação de Números
 
-export default function PartOne() {
+export default function Numbers() {
     const prompt = promptSync({ sigint: true });
     const { isNullOrNan } = Verifications();
     const { padStartFormatter } = BasicFormatters();

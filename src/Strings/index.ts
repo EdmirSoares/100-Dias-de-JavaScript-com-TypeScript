@@ -2,7 +2,7 @@ import promptSync from "prompt-sync";
 
 //Manipulação de Strings
 
-export default function PartTwo() {
+export default function Strings() {
     const prompt = promptSync({ sigint: true });
 
     const palindromeString = () => {

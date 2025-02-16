@@ -1,15 +1,15 @@
 import PromptSync from "prompt-sync";
 
-import PartOne from "./PartOne";
-import PartTwo from "./PartTwo";
-import PartThree from "./PartThree";
+import Numbers from "./Numbers";
+import Strings from "./Strings";
+import Conditionals from "./Conditionals";
 
 
 const prompt = PromptSync({ sigint: true });
 
-const partOne = PartOne()
-const partTwo = PartTwo()
-const partThree = PartThree()
+const partOne = Numbers()
+const partTwo = Strings()
+const partThree = Conditionals()
 
 const functions: Record<string, () => void | Promise<void>> = {
     ...partOne,
