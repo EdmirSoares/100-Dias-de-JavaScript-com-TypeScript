@@ -3,6 +3,7 @@ import PromptSync from "prompt-sync";
 import Numbers from "./Numbers";
 import Strings from "./Strings";
 import Conditionals from "./Conditionals";
+import Arrays from "./Arrays";
 
 
 const prompt = PromptSync({ sigint: true });
@@ -10,11 +11,13 @@ const prompt = PromptSync({ sigint: true });
 const partOne = Numbers()
 const partTwo = Strings()
 const partThree = Conditionals()
+const partFour = Arrays()
 
 const functions: Record<string, () => void | Promise<void>> = {
     ...partOne,
     ...partTwo,
-    ...partThree
+    ...partThree,
+    ...partFour
 };
 
 const functionsKeys = Object.keys(functions);
