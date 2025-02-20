@@ -34,7 +34,7 @@ export default function Arrays() {
     const sortingAnArray = () => {
         const arrNumberToBeSorted: number[] = [5, 3, 8, 1, 2, 7, 4, 6];
         const arrStringToBeSorted: string[] = ["banana", "apple", "cherry", "date", "fig", "grape"];
-    
+
         const sortArray = (arr: string[] | number[], ord: number) => {
             if (typeof arr[0] === "number") {
                 return ([...arr] as number[]).sort((a, b) => ord === 0 ? a - b : b - a);
@@ -42,9 +42,9 @@ export default function Arrays() {
                 return ([...arr] as string[]).sort((a, b) => ord === 0 ? a.localeCompare(b) : b.localeCompare(a));
             }
         };
-    
+
         const choicePrompt: number = Number(prompt("Informe 1 para ordenar um array de números ou 2 para um array de strings: "));
-        
+
         if (isNaN(choicePrompt) || (choicePrompt !== 1 && choicePrompt !== 2)) {
             console.log("Opção inválida!");
             console.log("Operação cancelada pelo usuário");
@@ -52,7 +52,7 @@ export default function Arrays() {
         }
 
         const direction: number = Number(prompt("Para ordenar em ordem crescente, digite 0, para ordem decrescente, digite 1: "))
-    
+
         if (choicePrompt === 1) {
             const sortedNumbers = sortArray(arrNumberToBeSorted, direction);
             console.log("Array sem orndenação:", arrNumberToBeSorted)
@@ -64,9 +64,32 @@ export default function Arrays() {
         }
     };
 
+    const removeDuplicatesWithReduce = () => {
+        const arrWithDuplicates: string[] = ["apple", "banana", "apple", "cherry", "banana", "date", "fig", "fig", "grape"];
+        const arrWithoutDuplicates = arrWithDuplicates.reduce((acc, value) => {
+            if (!acc.includes(value)) {
+                acc.push(value);
+            }
+            return acc;
+        }, [] as string[]);
+
+        console.log(`Array com duplicatas: ${arrWithDuplicates}`);
+        console.log(`Array sem duplicatas: ${arrWithoutDuplicates}`);
+    }
+
+    const removeDuplicatesEasyWay = () => {
+        const arrWithDuplicates: string[] = ["apple", "banana", "apple", "cherry", "banana", "date", "fig", "fig", "grape"];
+        const arrWithoutDuplicates = [...new Set(arrWithDuplicates)];
+        
+        console.log(`Array com duplicatas: ${arrWithDuplicates}`);
+        console.log(`Array sem duplicatas: ${arrWithoutDuplicates}`);
+    }
+
     return {
         largestNumberInAnArray,
-        sortingAnArray
+        sortingAnArray,
+        removeDuplicatesWithReduce,
+        removeDuplicatesEasyWay
     }
 
 }
